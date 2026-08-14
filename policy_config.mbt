@@ -27,6 +27,63 @@ pub fn parse_policy_config(text : String) -> Policy {
 }
 
 ///|
+pub fn policy_config_errors(text : String) -> Array[String] {
+  let errors : Array[String] = []
+  let lines = split_char(text, '\n')
+  for index = 0; index < lines.length(); index = index + 1 {
+    let clean = strip_config_comment(lines[index])
+    if clean != "" {
+      match config_pair(clean) {
+        None =>
+          errors.push(
+            "line " + (index + 1).to_string() + ": expected key = value",
+          )
+        Some((key, value)) =>
+          if !is_policy_config_key(key) {
+            errors.push(
+              "line " + (index + 1).to_string() + ": unknown key " + key,
+            )
+          } else if (key == "allow_copyleft" || key == "require_osi") &&
+            !is_bool_config_value(value) {
+            errors.push(
+              "line " +
+              (index + 1).to_string() +
+              ": " +
+              key +
+              " must be a boolean",
+            )
+          } else if key == "allow" ||
+            key == "allowed" ||
+            key == "deny" ||
+            key == "denied" {
+            for item in split_config_list(value) {
+              for error in validation_errors(item) {
+                errors.push("line " + (index + 1).to_string() + ": " + error)
+              }
+            }
+          }
+      }
+    }
+  }
+  errors
+}
+
+///|
+pub fn is_policy_config_key(key : String) -> Bool {
+  key == "allow" ||
+  key == "allowed" ||
+  key == "deny" ||
+  key == "denied" ||
+  key == "allow_copyleft" ||
+  key == "require_osi"
+}
+
+///|
+pub fn policy_config_valid(text : String) -> Bool {
+  policy_config_errors(text).is_empty()
+}
+
+///|
 pub fn strip_config_comment(line : String) -> String {
   match line.find("#") {
     Some(index) => trim_ascii(line.unsafe_substring(start=0, end=index))

@@ -256,6 +256,8 @@ pub fn is_known_license(String) -> Bool
 
 pub fn is_osi_license(String) -> Bool
 
+pub fn is_policy_config_key(String) -> Bool
+
 pub fn is_third_party_field(String) -> Bool
 
 pub fn is_valid(String) -> Bool
@@ -378,7 +380,11 @@ pub fn permissive_policy() -> Policy
 
 pub fn policy_allows(String, Policy) -> Bool
 
+pub fn policy_config_errors(String) -> Array[String]
+
 pub fn policy_config_report(Policy) -> String
+
+pub fn policy_config_valid(String) -> Bool
 
 pub fn policy_errors(String, Policy) -> Array[String]
 

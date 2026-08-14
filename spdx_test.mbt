@@ -56,6 +56,16 @@ test "policy checks permissive licenses" {
 }
 
 ///|
+test "policy config reports invalid input" {
+  let config = "allow = MIT, Unknown-1.0\nallow_copyleft = sometimes\nmode = strict\nplain text\n"
+  debug_inspect(
+    join_lines(policy_config_errors(config)),
+    content="\"line 1: unknown license: Unknown-1.0\\nline 2: allow_copyleft must be a boolean\\nline 3: unknown key mode\\nline 4: expected key = value\"",
+  )
+  debug_inspect(policy_config_valid(config), content="false")
+}
+
+///|
 test "policy explains alternative license choices" {
   let expression = "MIT OR (GPL-3.0-only AND Apache-2.0)"
   debug_inspect(
