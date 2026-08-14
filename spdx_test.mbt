@@ -406,6 +406,16 @@ test "baseline only fails newly introduced findings" {
 }
 
 ///|
+test "baseline reports malformed and duplicate records" {
+  let text = "src/a.mbt|policy|denied\nbroken\nsrc/a.mbt|policy|denied\n"
+  debug_inspect(
+    join_lines(baseline_parse_errors(text)),
+    content="\"line 2: expected path|kind|detail\\nline 3: duplicate finding\"",
+  )
+  debug_inspect(baseline_is_valid(text), content="false")
+}
+
+///|
 test "evidence combines audit gates" {
   let project = project_audit(
     "name = \"demo/pkg\"\nlicense = \"MIT\"\nrepository = \"https://example.invalid/demo\"\n",

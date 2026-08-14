@@ -42,7 +42,11 @@ pub fn audit_score(ProjectAudit) -> Int
 
 pub fn audit_workspace_report(String, String, Array[String], Array[String], Policy) -> String
 
+pub fn baseline_is_valid(String) -> Bool
+
 pub fn baseline_markdown(Array[AuditFinding], Array[AuditFinding]) -> String
+
+pub fn baseline_parse_errors(String) -> Array[String]
 
 pub fn baseline_passes(Array[AuditFinding], Array[AuditFinding]) -> Bool
 

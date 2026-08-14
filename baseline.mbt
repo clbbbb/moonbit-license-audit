@@ -84,6 +84,40 @@ pub fn parse_baseline(text : String) -> Array[AuditFinding] {
 }
 
 ///|
+pub fn baseline_parse_errors(text : String) -> Array[String] {
+  let errors : Array[String] = []
+  let seen : Array[String] = []
+  let lines = split_char(text, '\n')
+  for index = 0; index < lines.length(); index = index + 1 {
+    let line = trim_ascii(lines[index])
+    if line != "" && !line.has_prefix("#") {
+      match parse_baseline_line(line) {
+        None =>
+          errors.push(
+            "line " + (index + 1).to_string() + ": expected path|kind|detail",
+          )
+        Some(finding) => {
+          let key = finding_key(finding)
+          if contains_string(seen, key) {
+            errors.push(
+              "line " + (index + 1).to_string() + ": duplicate finding",
+            )
+          } else {
+            seen.push(key)
+          }
+        }
+      }
+    }
+  }
+  errors
+}
+
+///|
+pub fn baseline_is_valid(text : String) -> Bool {
+  baseline_parse_errors(text).is_empty()
+}
+
+///|
 pub fn parse_baseline_line(line : String) -> AuditFinding? {
   let parts = split_char(line, '|')
   if parts.length() < 3 {
