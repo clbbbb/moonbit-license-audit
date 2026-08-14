@@ -1,0 +1,720 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "clbbbb/moonbit-license-audit"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn action_for_error(String) -> String
+
+pub fn add_third_party_if_complete(Array[ThirdPartyPackage], String, String, String, Bool) -> Unit
+
+pub fn alternative_texts(String) -> Array[String]
+
+pub fn alternatives(Expr) -> Array[Expr]
+
+pub fn and_expr(Expr, Expr) -> Expr
+
+pub fn apache_obligations() -> Array[Obligation]
+
+pub fn ascii_space(Char) -> Bool
+
+pub fn audit_baseline_report(Array[String], Array[String], Policy, String) -> String
+
+pub fn audit_bundle_report(ProjectAudit) -> String
+
+pub fn audit_evidence(ProjectAudit, Array[ThirdPartyPackage], Array[AuditFinding], Array[AuditFinding], Policy) -> AuditEvidence
+
+pub fn audit_finding(String, String, String) -> AuditFinding
+
+pub fn audit_grade(ProjectAudit) -> String
+
+pub fn audit_passes(ProjectAudit) -> Bool
+
+pub fn audit_project_report(String, String, Array[String], Array[String], Policy) -> String
+
+pub fn audit_readme(String) -> ReadmeAudit
+
+pub fn audit_score(ProjectAudit) -> Int
+
+pub fn audit_workspace_report(String, String, Array[String], Array[String], Policy) -> String
+
+pub fn baseline_markdown(Array[AuditFinding], Array[AuditFinding]) -> String
+
+pub fn baseline_passes(Array[AuditFinding], Array[AuditFinding]) -> Bool
+
+pub fn baseline_report(Array[AuditFinding], Array[AuditFinding]) -> String
+
+pub fn bool_word(Bool) -> String
+
+pub fn build_inventory(Array[String], Array[String]) -> Array[LicenseUse]
+
+pub fn canonical_exception(String) -> String
+
+pub fn canonical_license(String) -> String
+
+pub fn check_mark(Bool) -> String
+
+pub fn choice_count(String) -> Int
+
+pub fn ci_annotation(AuditEvidence) -> String
+
+pub fn ci_should_fail(AuditEvidence) -> Bool
+
+pub fn classify_path(String) -> FileRule
+
+pub fn clean_comment_tail(String) -> String
+
+pub fn collect_manifest_findings(String, String, String, Array[String], Array[String], Policy) -> Unit
+
+pub fn collect_source_findings(Array[SourceLicense], Array[String], Array[String], Policy) -> Unit
+
+pub fn common_license_alias(String) -> String
+
+pub fn compatibility_cell(String, String, Bool, String) -> CompatibilityCell
+
+pub fn compatibility_errors(String) -> Array[String]
+
+pub fn compatibility_matrix(Array[String]) -> Array[CompatibilityCell]
+
+pub fn compatibility_matrix_report(Array[CompatibilityCell]) -> String
+
+pub fn compatibility_report(String) -> String
+
+pub fn compatibility_summary(Array[CompatibilityCell]) -> String
+
+pub fn compatible_for_distribution(String) -> Bool
+
+pub fn config_pair(String) -> (String, String)?
+
+pub fn contains_exception(Expr, String) -> Bool
+
+pub fn contains_license(Expr, String) -> Bool
+
+pub fn contains_obligation(Array[Obligation], String) -> Bool
+
+pub fn contains_public_domain_style(Expr) -> Bool
+
+pub fn contains_string(Array[String], String) -> Bool
+
+pub fn contains_strong_copyleft(Expr) -> Bool
+
+pub fn copyleft_licenses() -> Array[String]
+
+pub fn count_invalid_headers(Array[SourceLicense]) -> Int
+
+pub fn count_missing_headers(Array[SourceLicense]) -> Int
+
+pub fn csv_report(String) -> String
+
+pub fn deprecated_exceptions() -> Array[String]
+
+pub fn deprecated_licenses() -> Array[String]
+
+pub fn depth(Expr) -> Int
+
+pub fn diagnostic(String, String, String) -> Diagnostic
+
+pub fn diagnostics(String) -> Array[Diagnostic]
+
+pub fn diagnostics_report(String) -> String
+
+pub fn dominant_license(Array[LicenseUse]) -> String
+
+pub fn duplicate_third_party_errors(Array[ThirdPartyPackage], Array[String]) -> Unit
+
+pub fn evidence_error_count(AuditEvidence) -> Int
+
+pub fn evidence_failures(AuditEvidence) -> Array[String]
+
+pub fn evidence_file_names() -> Array[String]
+
+pub fn evidence_for_inputs(String, String, Array[String], Array[String], String, String, Policy) -> AuditEvidence
+
+pub fn evidence_inputs_report(String, String, Array[String], Array[String], String, String, Policy) -> String
+
+pub fn evidence_markdown(AuditEvidence) -> String
+
+pub fn evidence_passes(AuditEvidence) -> Bool
+
+pub fn evidence_report(AuditEvidence) -> String
+
+pub fn evidence_status(AuditEvidence) -> String
+
+pub fn evidence_summary(AuditEvidence) -> String
+
+pub fn evidence_warning_count(AuditEvidence) -> Int
+
+pub fn evidence_warnings(AuditEvidence) -> Array[String]
+
+pub fn exception_suggestion(String) -> String
+
+pub fn exceptions(Expr) -> Array[String]
+
+pub fn explain_expression(String) -> String
+
+pub fn expression_shape(String) -> String
+
+pub fn expression_shape_expr(Expr) -> String
+
+pub fn expression_stats(String) -> String
+
+pub fn extract_moon_mod_license(String) -> String?
+
+pub fn extract_moon_mod_name(String) -> String?
+
+pub fn extract_quoted_value(String, String) -> String?
+
+pub fn extract_quoted_value_line(String, String) -> String?
+
+pub fn extract_spdx_expression(String) -> String?
+
+pub fn fail(String) -> ParseResult
+
+pub fn file_copyleft_obligations(String) -> Array[Obligation]
+
+pub fn file_rule(String, String, Bool, String) -> FileRule
+
+pub fn file_rules_report(Array[String]) -> String
+
+pub fn files_using_license(Array[LicenseUse], String) -> Array[String]
+
+pub fn filter_sources_by_rule(Array[String], Array[String]) -> (Array[String], Array[String])
+
+pub fn finding_in(Array[AuditFinding], AuditFinding) -> Bool
+
+pub fn finding_key(AuditFinding) -> String
+
+pub fn findings_from_project(ProjectAudit) -> Array[AuditFinding]
+
+pub fn findings_from_sources(Array[String], Array[String], Policy) -> Array[AuditFinding]
+
+pub fn findings_lines(Array[AuditFinding]) -> Array[String]
+
+pub fn fix_suggestion(String, String, String) -> FixSuggestion
+
+pub fn format(Expr) -> String
+
+pub fn format_prec(Expr, Int) -> String
+
+pub fn highest_risk(String) -> String
+
+pub fn ignored_paths(Array[String]) -> Array[String]
+
+pub fn ignored_paths_report(Array[String]) -> String
+
+pub fn incompatible_pairs(Array[CompatibilityCell]) -> Array[CompatibilityCell]
+
+pub fn invalid_spdx_count(Array[String], Array[String]) -> Int
+
+pub fn inventory_compatibility_matrix(Array[LicenseUse]) -> Array[CompatibilityCell]
+
+pub fn inventory_licenses(Array[LicenseUse]) -> Array[String]
+
+pub fn inventory_markdown(Array[LicenseUse]) -> String
+
+pub fn inventory_policy_errors(Array[LicenseUse], Policy) -> Array[String]
+
+pub fn inventory_policy_report(Array[LicenseUse], Policy) -> String
+
+pub fn inventory_report(Array[LicenseUse]) -> String
+
+pub fn is_copyleft_license(String) -> Bool
+
+pub fn is_deprecated_exception(String) -> Bool
+
+pub fn is_deprecated_license(String) -> Bool
+
+pub fn is_known_exception(String) -> Bool
+
+pub fn is_known_license(String) -> Bool
+
+pub fn is_osi_license(String) -> Bool
+
+pub fn is_valid(String) -> Bool
+
+pub fn join_lines(Array[String]) -> String
+
+pub fn join_tail(Array[String], Int, String) -> String
+
+pub fn join_with(Array[String], String) -> String
+
+pub fn known_exceptions() -> Array[String]
+
+pub fn known_licenses() -> Array[String]
+
+pub fn license(String) -> Expr
+
+pub fn license_family(String) -> String
+
+pub fn license_needs_notice(String) -> Bool
+
+pub fn license_note(String) -> String
+
+pub fn license_pair_compatibility(String, String) -> CompatibilityCell
+
+pub fn license_profile(String) -> LicenseProfile
+
+pub fn license_risk(String) -> String
+
+pub fn license_suggestion(String) -> String
+
+pub fn license_use(String, String, Array[String], Bool) -> LicenseUse
+
+pub fn licenses(Expr) -> Array[String]
+
+pub fn lower_ascii(String) -> String
+
+pub fn markdown_report(String) -> String
+
+pub fn max_int(Int, Int) -> Int
+
+pub fn mentioned_license_ids(String) -> Array[String]
+
+pub fn merge_policy(Policy, Policy) -> Policy
+
+pub fn min_int(Int, Int) -> Int
+
+pub fn missing_spdx_count(Array[String], Array[String]) -> Int
+
+pub fn mixed_license_warning(Array[LicenseUse], String) -> String
+
+pub fn moon_mod_has_readme(String) -> Bool
+
+pub fn moon_mod_has_repository(String) -> Bool
+
+pub fn moon_mod_license_report(String) -> String
+
+pub fn moon_mod_metadata_report(String) -> String
+
+pub fn new_findings(Array[AuditFinding], Array[AuditFinding]) -> Array[AuditFinding]
+
+pub fn normalize(String) -> String
+
+pub fn normalize_license_list(Array[String]) -> Array[String]
+
+pub fn notice_checklist(String) -> Array[String]
+
+pub fn notice_checklist_report(String) -> String
+
+pub fn obligation(String, String, String, String) -> Obligation
+
+pub fn obligations_for_expr(Expr) -> Array[Obligation]
+
+pub fn obligations_for_license(String) -> Array[Obligation]
+
+pub fn obligations_report(String) -> String
+
+pub fn ok(Expr) -> ParseResult
+
+pub fn operators(Expr) -> Array[String]
+
+pub fn option_or(String?, String) -> String
+
+pub fn or_expr(Expr, Expr) -> Expr
+
+pub fn osi_approved() -> Array[String]
+
+pub fn package_audit_report(String, String) -> String
+
+pub fn parse(String) -> ParseResult
+
+pub fn parse_and(Array[Token], Int) -> ParseState
+
+pub fn parse_baseline(String) -> Array[AuditFinding]
+
+pub fn parse_baseline_line(String) -> AuditFinding?
+
+pub fn parse_bool(String) -> Bool
+
+pub fn parse_license_tail(Array[Token], Int, String) -> ParseState
+
+pub fn parse_or(Array[Token], Int) -> ParseState
+
+pub fn parse_or_panic(String) -> Expr
+
+pub fn parse_policy_config(String) -> Policy
+
+pub fn parse_primary(Array[Token], Int) -> ParseState
+
+pub fn parse_third_party_manifest(String) -> Array[ThirdPartyPackage]
+
+pub fn parse_tree(String) -> String
+
+pub fn paths_to_scan(Array[String]) -> Array[String]
+
+pub fn permissive_obligations(String) -> Array[Obligation]
+
+pub fn permissive_policy() -> Policy
+
+pub fn policy_allows(String, Policy) -> Bool
+
+pub fn policy_config_report(Policy) -> String
+
+pub fn policy_errors(String, Policy) -> Array[String]
+
+pub fn policy_errors_expr(Expr, Policy) -> Array[String]
+
+pub fn policy_errors_license(String, Policy) -> Array[String]
+
+pub fn policy_errors_with_exception(String, String, Policy) -> Array[String]
+
+pub fn policy_from_mode(String) -> Policy
+
+pub fn policy_report(String, Policy) -> String
+
+pub fn prefix_errors(String, Array[String]) -> Array[String]
+
+pub fn profile_row(String) -> String
+
+pub fn profile_table(String) -> String
+
+pub fn project_audit(String, String, Array[String], Array[String], Policy) -> ProjectAudit
+
+pub fn project_audit_markdown(ProjectAudit) -> String
+
+pub fn project_audit_report(ProjectAudit) -> String
+
+pub fn public_domain_style_obligations(String) -> Array[Obligation]
+
+pub fn push_markdown_section(Array[String], String, Array[String]) -> Unit
+
+pub fn push_section(Array[String], String, Array[String]) -> Unit
+
+pub fn quick_fix(String) -> String
+
+pub fn quoted_prefix(String) -> String?
+
+pub fn readme_audit_report(String) -> String
+
+pub fn readme_audit_report_from_audit(ReadmeAudit) -> String
+
+pub fn readme_audit_warnings(ReadmeAudit) -> Array[String]
+
+pub fn readme_has_code_block(String) -> Bool
+
+pub fn readme_has_license_section(String) -> Bool
+
+pub fn readme_has_section(String, String) -> Bool
+
+pub fn readme_has_title(String) -> Bool
+
+pub fn readme_matches_package_license(String, String) -> Bool
+
+pub fn readme_mentions_license(String, String) -> Bool
+
+pub fn readme_mentions_license_safe(String, String) -> Bool
+
+pub fn release_checklist(String, String, Array[String], Array[String], Policy) -> Array[ReleaseItem]
+
+pub fn release_checklist_report(Array[ReleaseItem]) -> String
+
+pub fn release_item(String, Bool, String) -> ReleaseItem
+
+pub fn release_ready(String, String, Array[String], Array[String], Policy) -> Bool
+
+pub fn release_report(String, String, Array[String], Array[String], Policy) -> String
+
+pub fn remediation_markdown(ProjectAudit) -> String
+
+pub fn remediation_report(ProjectAudit) -> String
+
+pub fn requirement_count(String) -> Int
+
+pub fn requirement_texts(String) -> Array[String]
+
+pub fn requirements(Expr) -> Array[Expr]
+
+pub fn resolved_findings(Array[AuditFinding], Array[AuditFinding]) -> Array[AuditFinding]
+
+pub fn review_level(String) -> String
+
+pub fn scan_report(String, String) -> String
+
+pub fn scan_source(String, String) -> SourceLicense
+
+pub fn scan_sources(Array[String], Array[String]) -> Array[SourceLicense]
+
+pub fn scan_sources_report(Array[String], Array[String]) -> String
+
+pub fn serialize_baseline(Array[AuditFinding]) -> String
+
+pub fn severity_for_error(String) -> String
+
+pub fn should_scan_path(String) -> Bool
+
+pub fn simplify_and(Expr, Expr) -> Expr
+
+pub fn simplify_expr(Expr) -> Expr
+
+pub fn simplify_or(Expr, Expr) -> Expr
+
+pub fn simplify_text(String) -> String
+
+pub fn source_license(String, String, Bool, Bool, String) -> SourceLicense
+
+pub fn split_char(String, Char) -> Array[String]
+
+pub fn split_config_list(String) -> Array[String]
+
+pub fn state(Expr, Int) -> ParseState
+
+pub fn state_error(String, Int) -> ParseState
+
+pub fn strict_policy(Array[String]) -> Policy
+
+pub fn strip_config_comment(String) -> String
+
+pub fn strong_copyleft_obligations(String) -> Array[Obligation]
+
+pub fn suggestion_suffix(Diagnostic) -> String
+
+pub fn suggestions_for_audit(ProjectAudit) -> Array[FixSuggestion]
+
+pub fn summary(String) -> String
+
+pub fn text_replace(String, String, String) -> String
+
+pub fn third_party_by_license(Array[ThirdPartyPackage], String) -> Array[ThirdPartyPackage]
+
+pub fn third_party_count_for_license(Array[ThirdPartyPackage], String) -> Int
+
+pub fn third_party_errors(Array[ThirdPartyPackage], Policy) -> Array[String]
+
+pub fn third_party_field(String) -> (String, String)?
+
+pub fn third_party_invalid_licenses(Array[ThirdPartyPackage]) -> Array[String]
+
+pub fn third_party_license_summary(Array[ThirdPartyPackage]) -> String
+
+pub fn third_party_licenses(Array[ThirdPartyPackage]) -> Array[String]
+
+pub fn third_party_markdown(Array[ThirdPartyPackage], Policy) -> String
+
+pub fn third_party_names(Array[ThirdPartyPackage]) -> Array[String]
+
+pub fn third_party_needs_notice(ThirdPartyPackage) -> Bool
+
+pub fn third_party_package(String, String, String, Bool) -> ThirdPartyPackage
+
+pub fn third_party_package_errors(ThirdPartyPackage, Policy) -> Array[String]
+
+pub fn third_party_policy_passes(Array[ThirdPartyPackage], Policy) -> Bool
+
+pub fn third_party_release_ready(Array[ThirdPartyPackage], Policy) -> Bool
+
+pub fn third_party_release_report(Array[ThirdPartyPackage], Policy) -> String
+
+pub fn third_party_report(Array[ThirdPartyPackage], Policy) -> String
+
+pub fn third_party_risk_summary(Array[ThirdPartyPackage]) -> String
+
+pub fn third_party_sources_missing(Array[ThirdPartyPackage]) -> Array[String]
+
+pub fn third_party_without_notice(Array[ThirdPartyPackage]) -> Array[ThirdPartyPackage]
+
+pub fn token_from_word(String, Int) -> Token
+
+pub fn tokenize(String) -> Array[Token]
+
+pub fn tokens_report(String) -> String
+
+pub fn tree(Expr) -> String
+
+pub fn trim_ascii(String) -> String
+
+pub fn trim_config_value(String) -> String
+
+pub fn unchanged_findings(Array[AuditFinding], Array[AuditFinding]) -> Array[AuditFinding]
+
+pub fn unique_strings(Array[String]) -> Array[String]
+
+pub fn unknown_exceptions(String) -> Array[String]
+
+pub fn unknown_licenses(String) -> Array[String]
+
+pub fn upper_ascii(String) -> String
+
+pub fn validation_errors(String) -> Array[String]
+
+pub fn validation_errors_expr(Expr) -> Array[String]
+
+pub fn validation_report(String) -> String
+
+pub fn weak_copyleft_obligations(String) -> Array[Obligation]
+
+pub fn with_exception(String, String) -> Expr
+
+pub fn workspace_audit(String, String, Array[String], Array[String], Policy) -> WorkspaceAudit
+
+pub fn workspace_errors(WorkspaceAudit, Policy) -> Array[String]
+
+pub fn workspace_grade(WorkspaceAudit, Policy) -> String
+
+pub fn workspace_report(WorkspaceAudit, Policy) -> String
+
+pub fn workspace_score(WorkspaceAudit, Policy) -> Int
+
+pub fn workspace_warnings(WorkspaceAudit) -> Array[String]
+
+pub fn wrap_if(Bool, String) -> String
+
+// Errors
+
+// Types and methods
+pub struct AuditEvidence {
+  project : ProjectAudit
+  third_party_errors : Array[String]
+  baseline_new : Array[AuditFinding]
+  generated_files : Array[String]
+} derive(Eq, @debug.Debug)
+
+pub struct AuditFinding {
+  path : String
+  kind : String
+  detail : String
+} derive(Eq, @debug.Debug)
+
+pub struct CompatibilityCell {
+  left : String
+  right : String
+  compatible : Bool
+  reason : String
+} derive(Eq, @debug.Debug)
+
+pub struct Diagnostic {
+  severity : String
+  message : String
+  suggestion : String
+} derive(Eq, @debug.Debug)
+
+pub(all) enum Expr {
+  License(String)
+  LicenseWithException(String, String)
+  And(Expr, Expr)
+  Or(Expr, Expr)
+} derive(Eq, @debug.Debug)
+
+pub struct FileRule {
+  path : String
+  kind : String
+  should_scan : Bool
+  reason : String
+} derive(Eq, @debug.Debug)
+
+pub struct FixSuggestion {
+  target : String
+  severity : String
+  action : String
+} derive(Eq, @debug.Debug)
+
+pub struct LicenseProfile {
+  id : String
+  family : String
+  osi : Bool
+  copyleft : Bool
+  risk : String
+  note : String
+} derive(Eq, @debug.Debug)
+
+pub struct LicenseUse {
+  path : String
+  expression : String
+  licenses : Array[String]
+  valid : Bool
+} derive(Eq, @debug.Debug)
+
+pub struct Obligation {
+  key : String
+  title : String
+  detail : String
+  severity : String
+} derive(Eq, @debug.Debug)
+
+pub struct ParseResult {
+  ok : Bool
+  expr : Expr?
+  error : String
+} derive(Eq, @debug.Debug)
+
+pub struct ParseState {
+  expr : Expr?
+  index : Int
+  error : String
+} derive(Eq, @debug.Debug)
+
+pub struct Policy {
+  allowed : Array[String]
+  denied : Array[String]
+  allow_copyleft : Bool
+  require_osi : Bool
+} derive(Eq, @debug.Debug)
+
+pub struct ProjectAudit {
+  package_name : String
+  package_license : String
+  readme_ok : Bool
+  source_count : Int
+  missing_headers : Int
+  invalid_headers : Int
+  policy_errors : Array[String]
+  warnings : Array[String]
+} derive(Eq, @debug.Debug)
+
+pub struct ReadmeAudit {
+  has_title : Bool
+  has_license : Bool
+  has_install : Bool
+  has_usage : Bool
+  has_example : Bool
+  mentioned_licenses : Array[String]
+} derive(Eq, @debug.Debug)
+
+pub struct ReleaseItem {
+  name : String
+  passed : Bool
+  detail : String
+} derive(Eq, @debug.Debug)
+
+pub struct SourceLicense {
+  path : String
+  expression : String
+  found : Bool
+  valid : Bool
+  message : String
+} derive(Eq, @debug.Debug)
+
+pub struct ThirdPartyPackage {
+  name : String
+  license : String
+  source : String
+  notice : Bool
+} derive(Eq, @debug.Debug)
+
+pub struct Token {
+  kind : TokenKind
+  text : String
+  offset : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) enum TokenKind {
+  Ident(String)
+  AndTok
+  OrTok
+  WithTok
+  LParen
+  RParen
+} derive(Eq, @debug.Debug)
+
+pub struct WorkspaceAudit {
+  project : ProjectAudit
+  readme : ReadmeAudit
+  inventory : Array[LicenseUse]
+  ignored_paths : Array[String]
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits
+
