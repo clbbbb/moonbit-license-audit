@@ -46,6 +46,7 @@ let expr = "MIT OR Apache-2.0"
 println(normalize(expr))
 println(validation_report(expr))
 println(policy_report(expr, permissive_policy()))
+println(policy_option_report(expr, permissive_policy()))
 println(profile_table(expr))
 println(scan_report("main.mbt", "// SPDX-License-Identifier: MIT\n"))
 println(copyright_report("main.mbt", "// SPDX-FileCopyrightText: 2026 Example Contributors\n"))

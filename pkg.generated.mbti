@@ -10,6 +10,8 @@ pub fn action_for_error(String) -> String
 
 pub fn add_third_party_if_complete(Array[ThirdPartyPackage], String, String, String, Bool) -> Unit
 
+pub fn allowed_policy_options(String, Policy) -> Array[String]
+
 pub fn alternative_texts(String) -> Array[String]
 
 pub fn alternatives(Expr) -> Array[Expr]
@@ -71,6 +73,8 @@ pub fn collect_manifest_findings(String, String, String, Array[String], Array[St
 pub fn collect_source_alignment(Array[SourceLicense], String, Array[String]) -> Unit
 
 pub fn collect_source_findings(Array[SourceLicense], Array[String], Array[String], Policy) -> Unit
+
+pub fn combine_policy_options(Array[Expr], Array[Expr]) -> Array[Expr]
 
 pub fn comment_text(String) -> String?
 
@@ -385,6 +389,10 @@ pub fn policy_errors_license(String, Policy) -> Array[String]
 pub fn policy_errors_with_exception(String, String, Policy) -> Array[String]
 
 pub fn policy_from_mode(String) -> Policy
+
+pub fn policy_option_expressions(Expr) -> Array[Expr]
+
+pub fn policy_option_report(String, Policy) -> String
 
 pub fn policy_report(String, Policy) -> String
 

@@ -126,3 +126,66 @@ pub fn policy_report(text : String, policy : Policy) -> String {
 pub fn policy_allows(text : String, policy : Policy) -> Bool {
   policy_errors(text, policy).is_empty()
 }
+
+///|
+pub fn policy_option_expressions(expr : Expr) -> Array[Expr] {
+  match expr {
+    Or(left, right) =>
+      policy_option_expressions(left) + policy_option_expressions(right)
+    And(left, right) =>
+      combine_policy_options(
+        policy_option_expressions(left),
+        policy_option_expressions(right),
+      )
+    _ => [expr]
+  }
+}
+
+///|
+pub fn combine_policy_options(
+  left : Array[Expr],
+  right : Array[Expr],
+) -> Array[Expr] {
+  let rows : Array[Expr] = []
+  for left_expr in left {
+    for right_expr in right {
+      rows.push(And(left_expr, right_expr))
+    }
+  }
+  rows
+}
+
+///|
+pub fn allowed_policy_options(text : String, policy : Policy) -> Array[String] {
+  match parse(text).expr {
+    Some(expr) => {
+      let rows : Array[String] = []
+      for option in policy_option_expressions(expr) {
+        if policy_errors_expr(option, policy).is_empty() {
+          rows.push(format(option))
+        }
+      }
+      rows
+    }
+    None => []
+  }
+}
+
+///|
+pub fn policy_option_report(text : String, policy : Policy) -> String {
+  match parse(text).expr {
+    None => "parse error: " + parse(text).error
+    Some(expr) => {
+      let rows : Array[String] = ["options:"]
+      for option in policy_option_expressions(expr) {
+        let errors = policy_errors_expr(option, policy)
+        if errors.is_empty() {
+          rows.push("[x] " + format(option))
+        } else {
+          rows.push("[ ] " + format(option) + " - " + join_with(errors, "; "))
+        }
+      }
+      join_lines(rows)
+    }
+  }
+}

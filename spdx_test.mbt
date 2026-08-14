@@ -56,6 +56,19 @@ test "policy checks permissive licenses" {
 }
 
 ///|
+test "policy explains alternative license choices" {
+  let expression = "MIT OR (GPL-3.0-only AND Apache-2.0)"
+  debug_inspect(
+    allowed_policy_options(expression, permissive_policy()),
+    content="[\"MIT\"]",
+  )
+  debug_inspect(
+    policy_option_report(expression, permissive_policy()),
+    content="\"options:\\n[x] MIT\\n[ ] GPL-3.0-only AND Apache-2.0 - license not allowed: GPL-3.0-only; copyleft license not allowed: GPL-3.0-only\"",
+  )
+}
+
+///|
 test "reports summarize expression" {
   debug_inspect(summary("MIT").has_prefix("normalized=MIT"), content="true")
   debug_inspect(
