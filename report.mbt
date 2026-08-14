@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: 2026 clbbbb
+
 ///|
 pub fn summary(text : String) -> String {
   match parse(text).expr {

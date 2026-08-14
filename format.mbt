@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: 2026 clbbbb
+
 ///|
 pub fn format(expr : Expr) -> String {
   format_prec(expr, 0)

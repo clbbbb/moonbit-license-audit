@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: 2026 clbbbb
+
 ///|
 pub fn validation_errors(text : String) -> Array[String] {
   let result = parse(text)

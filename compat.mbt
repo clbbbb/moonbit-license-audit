@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: 2026 clbbbb
+
 ///|
 pub fn compatible_for_distribution(text : String) -> Bool {
   compatibility_errors(text).is_empty()

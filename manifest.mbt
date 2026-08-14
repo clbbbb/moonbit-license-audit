@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: 2026 clbbbb
+
 ///|
 pub fn extract_moon_mod_license(text : String) -> String? {
   extract_quoted_value(text, "license")

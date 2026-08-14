@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: 2026 clbbbb
+
 ///|
 pub fn parse_policy_config(text : String) -> Policy {
   let mut allowed : Array[String] = []

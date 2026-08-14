@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: 2026 clbbbb
+
 ///|
 pub fn tokenize(text : String) -> Array[Token] {
   let tokens : Array[Token] = []
