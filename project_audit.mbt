@@ -27,6 +27,7 @@ pub fn project_audit(
     moon_mod, readme, package_license, warnings, policy_items, policy,
   )
   collect_source_findings(source_results, warnings, policy_items, policy)
+  collect_source_alignment(source_results, package_license, warnings)
   {
     package_name,
     package_license: normalize(package_license),
@@ -93,6 +94,23 @@ pub fn collect_source_findings(
       for error in policy_errors(item.expression, policy) {
         policy_items.push(item.path + ": " + error)
       }
+    }
+  }
+}
+
+///|
+pub fn collect_source_alignment(
+  results : Array[SourceLicense],
+  package_license : String,
+  warnings : Array[String],
+) -> Unit {
+  if package_license != "" && is_valid(package_license) {
+    let summary = mixed_license_warning(
+      inventory_from_source_results(results),
+      package_license,
+    )
+    if summary != "source headers match package license" {
+      warnings.push(summary)
     }
   }
 }

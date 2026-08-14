@@ -19,7 +19,7 @@ metadata. It checks `moon.mod` license declarations, source-file
 - parse simple policy configuration text
 - classify licenses by family and review risk
 - generate license obligation and notice checklists
-- build a source-file license inventory
+- build a source-file license inventory and flag divergence from the package license
 - validate a small hand-written third-party dependency manifest, including malformed records and duplicate fields
 - compare findings with a checked-in audit baseline for CI
 - produce project audit, release checklist, remediation, and evidence reports

@@ -68,6 +68,8 @@ pub fn clean_comment_tail(String) -> String
 
 pub fn collect_manifest_findings(String, String, String, Array[String], Array[String], Policy) -> Unit
 
+pub fn collect_source_alignment(Array[SourceLicense], String, Array[String]) -> Unit
+
 pub fn collect_source_findings(Array[SourceLicense], Array[String], Array[String], Policy) -> Unit
 
 pub fn comment_text(String) -> String?
@@ -215,6 +217,8 @@ pub fn incompatible_pairs(Array[CompatibilityCell]) -> Array[CompatibilityCell]
 pub fn invalid_spdx_count(Array[String], Array[String]) -> Int
 
 pub fn inventory_compatibility_matrix(Array[LicenseUse]) -> Array[CompatibilityCell]
+
+pub fn inventory_from_source_results(Array[SourceLicense]) -> Array[LicenseUse]
 
 pub fn inventory_licenses(Array[LicenseUse]) -> Array[String]
 

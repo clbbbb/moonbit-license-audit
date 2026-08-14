@@ -21,8 +21,15 @@ pub fn build_inventory(
   paths : Array[String],
   sources : Array[String],
 ) -> Array[LicenseUse] {
+  inventory_from_source_results(scan_sources(paths, sources))
+}
+
+///|
+pub fn inventory_from_source_results(
+  results : Array[SourceLicense],
+) -> Array[LicenseUse] {
   let rows : Array[LicenseUse] = []
-  for item in scan_sources(paths, sources) {
+  for item in results {
     if item.found && item.valid {
       match parse(item.expression).expr {
         Some(expr) =>

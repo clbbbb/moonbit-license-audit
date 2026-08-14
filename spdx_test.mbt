@@ -186,6 +186,10 @@ test "project audit and release checklist" {
   debug_inspect(audit_passes(audit), content="true")
   debug_inspect(audit_grade(audit), content="\"A\"")
   debug_inspect(
+    join_lines(audit.warnings),
+    content="\"source headers include additional licenses: MIT,Apache-2.0\"",
+  )
+  debug_inspect(
     release_ready(mod_text, readme, paths, sources, permissive_policy()),
     content="true",
   )
