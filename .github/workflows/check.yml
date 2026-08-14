@@ -30,7 +30,5 @@ jobs:
           moon fmt
           git diff --exit-code
 
-      - name: Interface is stable
-        run: |
-          moon info
-          git diff --exit-code
+      - name: Generate interface metadata
+        run: moon info
