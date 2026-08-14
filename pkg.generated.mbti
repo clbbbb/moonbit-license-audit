@@ -226,6 +226,8 @@ pub fn inventory_policy_report(Array[LicenseUse], Policy) -> String
 
 pub fn inventory_report(Array[LicenseUse]) -> String
 
+pub fn is_bool_config_value(String) -> Bool
+
 pub fn is_copyleft_license(String) -> Bool
 
 pub fn is_deprecated_exception(String) -> Bool
@@ -237,6 +239,8 @@ pub fn is_known_exception(String) -> Bool
 pub fn is_known_license(String) -> Bool
 
 pub fn is_osi_license(String) -> Bool
+
+pub fn is_third_party_field(String) -> Bool
 
 pub fn is_valid(String) -> Bool
 
@@ -500,6 +504,10 @@ pub fn third_party_license_summary(Array[ThirdPartyPackage]) -> String
 
 pub fn third_party_licenses(Array[ThirdPartyPackage]) -> Array[String]
 
+pub fn third_party_manifest_errors(String) -> Array[String]
+
+pub fn third_party_manifest_valid(String) -> Bool
+
 pub fn third_party_markdown(Array[ThirdPartyPackage], Policy) -> String
 
 pub fn third_party_names(Array[ThirdPartyPackage]) -> Array[String]
@@ -511,6 +519,8 @@ pub fn third_party_package(String, String, String, Bool) -> ThirdPartyPackage
 pub fn third_party_package_errors(ThirdPartyPackage, Policy) -> Array[String]
 
 pub fn third_party_policy_passes(Array[ThirdPartyPackage], Policy) -> Bool
+
+pub fn third_party_record_errors(Int, String, String, String) -> Array[String]
 
 pub fn third_party_release_ready(Array[ThirdPartyPackage], Policy) -> Bool
 

@@ -152,13 +152,20 @@ pub fn evidence_for_inputs(
 ) -> AuditEvidence {
   let project = project_audit(moon_mod, readme, paths, sources, policy)
   let findings = findings_from_sources(paths, sources, policy)
-  audit_evidence(
+  let evidence = audit_evidence(
     project,
     parse_third_party_manifest(packages_text),
     findings,
     parse_baseline(baseline_text),
     policy,
   )
+  {
+    project: evidence.project,
+    third_party_errors: evidence.third_party_errors +
+    third_party_manifest_errors(packages_text),
+    baseline_new: evidence.baseline_new,
+    generated_files: evidence.generated_files,
+  }
 }
 
 ///|

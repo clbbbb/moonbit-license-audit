@@ -20,7 +20,7 @@ metadata. It checks `moon.mod` license declarations, source-file
 - classify licenses by family and review risk
 - generate license obligation and notice checklists
 - build a source-file license inventory
-- validate a small hand-written third-party dependency manifest
+- validate a small hand-written third-party dependency manifest, including malformed records and duplicate fields
 - compare findings with a checked-in audit baseline for CI
 - produce project audit, release checklist, remediation, and evidence reports
 - render text, Markdown, CSV, and tree reports
@@ -67,6 +67,15 @@ let sources = [
 let audit = project_audit(moon_mod, readme, paths, sources, permissive_policy())
 println(project_audit_report(audit))
 println(remediation_report(audit))
+```
+
+Third-party manifest input is checked before it enters an evidence report. A
+record needs name, license, and source fields; unknown or repeated keys and
+non-boolean notice values are reported with line numbers.
+
+```moonbit nocheck
+let manifest = "name = \"demo-lib\"\nlicense = \"MIT\"\nsource = \"https://example.invalid/demo-lib\"\nnotice = true\n"
+println(join_lines(third_party_manifest_errors(manifest)))
 ```
 
 ## Scope

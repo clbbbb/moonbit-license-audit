@@ -54,6 +54,111 @@ pub fn parse_third_party_manifest(text : String) -> Array[ThirdPartyPackage] {
 }
 
 ///|
+pub fn third_party_manifest_errors(text : String) -> Array[String] {
+  let mut errors : Array[String] = []
+  let mut name = ""
+  let mut license = ""
+  let mut source = ""
+  let mut record_line = 0
+  let mut seen : Array[String] = []
+  let lines = split_char(text, '\n')
+  for index = 0; index < lines.length(); index = index + 1 {
+    let clean = trim_ascii(lines[index])
+    if clean == "" {
+      errors = errors +
+        third_party_record_errors(record_line, name, license, source)
+      name = ""
+      license = ""
+      source = ""
+      record_line = 0
+      seen = []
+    } else if !clean.has_prefix("#") {
+      if record_line == 0 {
+        record_line = index + 1
+      }
+      match third_party_field(clean) {
+        Some((key, value)) =>
+          if !is_third_party_field(key) {
+            errors.push(
+              "line " + (index + 1).to_string() + ": unknown field " + key,
+            )
+          } else if contains_string(seen, key) {
+            errors.push(
+              "line " + (index + 1).to_string() + ": duplicate field " + key,
+            )
+          } else if key == "notice" && !is_bool_config_value(value) {
+            errors.push(
+              "line " +
+              (index + 1).to_string() +
+              ": notice must be true or false",
+            )
+          } else {
+            seen.push(key)
+            if key == "name" {
+              name = value
+            } else if key == "license" {
+              license = value
+            } else if key == "source" {
+              source = value
+            } else {
+              ()
+            }
+          }
+        None =>
+          errors.push(
+            "line " + (index + 1).to_string() + ": expected key = value",
+          )
+      }
+    }
+  }
+  errors + third_party_record_errors(record_line, name, license, source)
+}
+
+///|
+pub fn is_third_party_field(key : String) -> Bool {
+  key == "name" || key == "license" || key == "source" || key == "notice"
+}
+
+///|
+pub fn is_bool_config_value(value : String) -> Bool {
+  let lower = lower_ascii(value)
+  lower == "true" || lower == "false"
+}
+
+///|
+pub fn third_party_record_errors(
+  line : Int,
+  name : String,
+  license : String,
+  source : String,
+) -> Array[String] {
+  let errors : Array[String] = []
+  if line > 0 {
+    if name == "" {
+      errors.push(
+        "record starting at line " + line.to_string() + ": name is missing",
+      )
+    }
+    if license == "" {
+      errors.push(
+        "record starting at line " + line.to_string() + ": license is missing",
+      )
+    }
+    if source == "" {
+      errors.push(
+        "record starting at line " + line.to_string() + ": source is missing",
+      )
+    }
+  }
+  errors
+}
+
+///|
+pub fn third_party_manifest_valid(text : String) -> Bool {
+  third_party_manifest_errors(text).is_empty()
+}
+
+///|
 pub fn third_party_field(line : String) -> (String, String)? {
   match line.find("=") {
     Some(index) => {

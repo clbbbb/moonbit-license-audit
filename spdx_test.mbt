@@ -337,6 +337,17 @@ test "third party manifest is policy checked" {
 }
 
 ///|
+test "third party manifest reports malformed records" {
+  let text = "name = \"tiny-lib\"\nlicense = \"MIT\"\nnotice = maybe\nextra = \"value\"\n"
+  let errors = third_party_manifest_errors(text)
+  debug_inspect(
+    join_lines(errors),
+    content="\"line 3: notice must be true or false\\nline 4: unknown field extra\\nrecord starting at line 1: source is missing\"",
+  )
+  debug_inspect(third_party_manifest_valid(text), content="false")
+}
+
+///|
 test "baseline only fails newly introduced findings" {
   let old = [
     audit_finding("src/a.mbt", "missing-spdx", "SPDX header is missing"),
