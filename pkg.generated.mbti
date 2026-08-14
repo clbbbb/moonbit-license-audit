@@ -106,6 +106,8 @@ pub fn contains_strong_copyleft(Expr) -> Bool
 
 pub fn copyleft_licenses() -> Array[String]
 
+pub fn copyright_report(String, String) -> String
+
 pub fn count_invalid_headers(Array[SourceLicense]) -> Int
 
 pub fn count_missing_headers(Array[SourceLicense]) -> Int
@@ -172,9 +174,13 @@ pub fn extract_quoted_value(String, String) -> String?
 
 pub fn extract_quoted_value_line(String, String) -> String?
 
+pub fn extract_spdx_copyright_texts(String) -> Array[String]
+
 pub fn extract_spdx_expression(String) -> String?
 
 pub fn extract_spdx_expressions(String) -> Array[String]
+
+pub fn extract_spdx_tag_values(String, String) -> Array[String]
 
 pub fn fail(String) -> ParseResult
 
@@ -205,6 +211,8 @@ pub fn fix_suggestion(String, String, String) -> FixSuggestion
 pub fn format(Expr) -> String
 
 pub fn format_prec(Expr, Int) -> String
+
+pub fn has_empty_string(Array[String]) -> Bool
 
 pub fn highest_risk(String) -> String
 
@@ -289,6 +297,8 @@ pub fn mentioned_license_ids(String) -> Array[String]
 pub fn merge_policy(Policy, Policy) -> Policy
 
 pub fn min_int(Int, Int) -> Int
+
+pub fn missing_copyright_count(Array[String], Array[String]) -> Int
 
 pub fn missing_spdx_count(Array[String], Array[String]) -> Int
 
@@ -444,6 +454,10 @@ pub fn resolved_findings(Array[AuditFinding], Array[AuditFinding]) -> Array[Audi
 
 pub fn review_level(String) -> String
 
+pub fn scan_copyright(String, String) -> SourceCopyright
+
+pub fn scan_copyrights(Array[String], Array[String]) -> Array[SourceCopyright]
+
 pub fn scan_report(String, String) -> String
 
 pub fn scan_source(String, String) -> SourceLicense
@@ -466,11 +480,15 @@ pub fn simplify_or(Expr, Expr) -> Expr
 
 pub fn simplify_text(String) -> String
 
+pub fn source_copyright(String, Array[String], Bool, Bool, String) -> SourceCopyright
+
 pub fn source_license(String, String, Bool, Bool, String) -> SourceLicense
 
 pub fn spdx_expression_in_comment(String) -> String?
 
 pub fn spdx_expressions_conflict(Array[String]) -> Bool
+
+pub fn spdx_tag_value_in_comment(String, String) -> String?
 
 pub fn split_char(String, Char) -> Array[String]
 
@@ -699,6 +717,14 @@ pub struct ReleaseItem {
   name : String
   passed : Bool
   detail : String
+} derive(Eq, @debug.Debug)
+
+pub struct SourceCopyright {
+  path : String
+  entries : Array[String]
+  found : Bool
+  valid : Bool
+  message : String
 } derive(Eq, @debug.Debug)
 
 pub struct SourceLicense {

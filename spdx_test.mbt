@@ -119,6 +119,21 @@ test "scan accepts block comments and rejects conflicts" {
 }
 
 ///|
+test "scan SPDX copyright text" {
+  let source = "// SPDX-FileCopyrightText: 2026 Example Contributors\n/* SPDX-FileCopyrightText: 2025 Demo Org */\n"
+  debug_inspect(
+    copyright_report("copyright.mbt", source),
+    content="\"copyright.mbt: 2026 Example Contributors; 2025 Demo Org\"",
+  )
+  debug_inspect(
+    missing_copyright_count(["a.mbt", "b.mbt"], [
+      source, "let text = \"SPDX-FileCopyrightText: ignored\"",
+    ]),
+    content="1",
+  )
+}
+
+///|
 test "scan multiple source files" {
   let paths = ["a.mbt", "b.mbt", "c.mbt"]
   let sources = [
