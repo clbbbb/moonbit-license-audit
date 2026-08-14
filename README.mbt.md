@@ -28,7 +28,7 @@ metadata. It checks `moon.mod` license declarations, source-file
 ## Install
 
 ```bash
-moon add clbbbb/moonbit-license-audit@0.1.0
+moon add clbbbb/moonbit-license-audit@0.1.1
 ```
 
 Local development:
