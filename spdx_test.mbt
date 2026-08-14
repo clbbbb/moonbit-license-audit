@@ -96,6 +96,29 @@ test "scan source license headers" {
 }
 
 ///|
+test "scan ignores SPDX text outside comments" {
+  let source = "let marker = \"SPDX-License-Identifier: MIT\"\n"
+  debug_inspect(
+    scan_report("string.mbt", source),
+    content="\"string.mbt: missing SPDX-License-Identifier\"",
+  )
+}
+
+///|
+test "scan accepts block comments and rejects conflicts" {
+  let block = "/* SPDX-License-Identifier: Apache-2.0 */\n"
+  debug_inspect(
+    scan_report("block.mbt", block),
+    content="\"block.mbt: ok Apache-2.0\"",
+  )
+  let conflict = "// SPDX-License-Identifier: MIT\n// SPDX-License-Identifier: Apache-2.0\n"
+  debug_inspect(
+    scan_report("conflict.mbt", conflict),
+    content="\"conflict.mbt: conflicting SPDX-License-Identifier values\"",
+  )
+}
+
+///|
 test "scan multiple source files" {
   let paths = ["a.mbt", "b.mbt", "c.mbt"]
   let sources = [

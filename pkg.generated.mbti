@@ -70,6 +70,8 @@ pub fn collect_manifest_findings(String, String, String, Array[String], Array[St
 
 pub fn collect_source_findings(Array[SourceLicense], Array[String], Array[String], Policy) -> Unit
 
+pub fn comment_text(String) -> String?
+
 pub fn common_license_alias(String) -> String
 
 pub fn compatibility_cell(String, String, Bool, String) -> CompatibilityCell
@@ -170,6 +172,8 @@ pub fn extract_quoted_value_line(String, String) -> String?
 
 pub fn extract_spdx_expression(String) -> String?
 
+pub fn extract_spdx_expressions(String) -> Array[String]
+
 pub fn fail(String) -> ParseResult
 
 pub fn file_copyleft_obligations(String) -> Array[Obligation]
@@ -191,6 +195,8 @@ pub fn findings_from_project(ProjectAudit) -> Array[AuditFinding]
 pub fn findings_from_sources(Array[String], Array[String], Policy) -> Array[AuditFinding]
 
 pub fn findings_lines(Array[AuditFinding]) -> Array[String]
+
+pub fn first_invalid_spdx_expression(Array[String]) -> String?
 
 pub fn fix_suggestion(String, String, String) -> FixSuggestion
 
@@ -453,6 +459,10 @@ pub fn simplify_or(Expr, Expr) -> Expr
 pub fn simplify_text(String) -> String
 
 pub fn source_license(String, String, Bool, Bool, String) -> SourceLicense
+
+pub fn spdx_expression_in_comment(String) -> String?
+
+pub fn spdx_expressions_conflict(Array[String]) -> Bool
 
 pub fn split_char(String, Char) -> Array[String]
 

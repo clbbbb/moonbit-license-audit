@@ -7,7 +7,7 @@ metadata. It checks `moon.mod` license declarations, source-file
 
 ## Features
 
-- extract and validate `SPDX-License-Identifier` headers
+- extract SPDX identifiers from line or block comments, validate them, and flag conflicting declarations
 - audit `moon.mod` license declarations against README text
 - tokenize and parse SPDX license expressions
 - support `AND`, `OR`, parentheses, and `WITH` exceptions
@@ -49,6 +49,10 @@ println(policy_report(expr, permissive_policy()))
 println(profile_table(expr))
 println(scan_report("main.mbt", "// SPDX-License-Identifier: MIT\n"))
 ```
+
+SPDX identifiers embedded in ordinary source text are ignored. If a file carries
+more than one distinct SPDX identifier, the scanner reports a conflict instead
+of silently choosing one.
 
 Project-level audit:
 

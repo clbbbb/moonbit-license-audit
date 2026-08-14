@@ -20,20 +20,55 @@ pub fn source_license(
 
 ///|
 pub fn extract_spdx_expression(source : String) -> String? {
-  let marker = "SPDX-License-Identifier:"
+  match extract_spdx_expressions(source) {
+    [first, ..] => Some(first)
+    [] => None
+  }
+}
+
+///|
+pub fn extract_spdx_expressions(source : String) -> Array[String] {
+  let expressions : Array[String] = []
   for line in split_char(source, '\n') {
-    match line.find(marker) {
-      Some(index) => {
-        let raw = line.unsafe_substring(
-          start=index + marker.length(),
-          end=line.length(),
-        )
-        return Some(clean_comment_tail(raw))
-      }
+    match spdx_expression_in_comment(line) {
+      Some(expression) => expressions.push(expression)
       None => ()
     }
   }
-  None
+  expressions
+}
+
+///|
+pub fn spdx_expression_in_comment(line : String) -> String? {
+  let marker = "SPDX-License-Identifier:"
+  match comment_text(line) {
+    Some(comment) =>
+      match comment.find(marker) {
+        Some(index) => {
+          let raw = comment.unsafe_substring(
+            start=index + marker.length(),
+            end=comment.length(),
+          )
+          Some(clean_comment_tail(raw))
+        }
+        None => None
+      }
+    None => None
+  }
+}
+
+///|
+pub fn comment_text(line : String) -> String? {
+  let trimmed = trim_ascii(line)
+  if trimmed.has_prefix("//") {
+    Some(trimmed.unsafe_substring(start=2, end=trimmed.length()))
+  } else if trimmed.has_prefix("/*") {
+    Some(trimmed.unsafe_substring(start=2, end=trimmed.length()))
+  } else if trimmed.has_prefix("*") {
+    Some(trimmed.unsafe_substring(start=1, end=trimmed.length()))
+  } else {
+    None
+  }
 }
 
 ///|
@@ -45,24 +80,54 @@ pub fn clean_comment_tail(text : String) -> String {
 
 ///|
 pub fn scan_source(path : String, source : String) -> SourceLicense {
-  match extract_spdx_expression(source) {
-    Some(expr) => {
-      let valid = is_valid(expr)
+  let expressions = extract_spdx_expressions(source)
+  match expressions {
+    [first, ..] => {
+      let invalid = first_invalid_spdx_expression(expressions)
+      let conflicting = spdx_expressions_conflict(expressions)
+      let valid = invalid is None && !conflicting
       source_license(
         path,
-        normalize(expr),
+        normalize(first),
         true,
         valid,
         if valid {
           "ok"
+        } else if conflicting {
+          "conflicting SPDX-License-Identifier values"
         } else {
-          validation_report(expr)
+          validation_report(option_or(invalid, first))
         },
       )
     }
-    None =>
+    [] =>
       source_license(path, "", false, false, "missing SPDX-License-Identifier")
   }
+}
+
+///|
+pub fn first_invalid_spdx_expression(expressions : Array[String]) -> String? {
+  for expression in expressions {
+    if !is_valid(expression) {
+      return Some(expression)
+    }
+  }
+  None
+}
+
+///|
+pub fn spdx_expressions_conflict(expressions : Array[String]) -> Bool {
+  let normalized : Array[String] = []
+  for expression in expressions {
+    if !is_valid(expression) {
+      return false
+    }
+    let value = normalize(expression)
+    if !contains_string(normalized, value) {
+      normalized.push(value)
+    }
+  }
+  normalized.length() > 1
 }
 
 ///|
